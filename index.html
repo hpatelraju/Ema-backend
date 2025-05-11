@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crypto EMA Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    #output { white-space: pre-wrap; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Crypto EMA Levels Viewer</h2>
+  <label>Enter Coin ID (e.g., dogecoin):</label>
+  <input type="text" id="coinId" value="dogecoin" />
+  <button onclick="fetchEMA()">Get EMA</button>
+  <div id="output"></div>
+
+  <script>
+    async function fetchEMA() {
+      const coinId = document.getElementById("coinId").value;
+      const res = await fetch(`/api/ema?coin_id=${coinId}`);
+      const data = await res.json();
+      document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
